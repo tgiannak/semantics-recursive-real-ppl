@@ -25,7 +25,7 @@ Set Bullet Behavior "Strict Subproofs".
 
 Open Scope nat.
 
-(* Definition 7.1 (part 1) {def-ciu} *)
+(* Definition 4.1 (part 1) {def-ciu} *)
 Definition CIU (e1 e2 : Expr) :=
   ECLOSED e1 /\
   ECLOSED e2 /\
@@ -33,7 +33,7 @@ Definition CIU (e1 e2 : Expr) :=
     KCLOSED K ->
     Rbar_le (μeval_star e1 K A) (μeval_star e2 K A).
 
-(* Definition 7.2 (part 1) {def-ciu}.
+(* Definition 4.2 (part 1) {def-ciu}.
    Scoping results from use of CIU, see CIU_open_scope. *)
 Definition CIU_open (Γ : Env) (e1 e2 : Expr) :=
   forall γ,
@@ -104,7 +104,7 @@ Qed.
 
 Hint Resolve CIU_open_scope_r.
 
-(* Lemma 7.3 {lemma-e-subset-ciu} *)
+(* Lemma 4.2 {lemma-e-subset-ciu} *)
 Lemma Erel_implies_CIU : forall {Γ e1 e2},
     Erel_open Γ e1 e2 ->
     CIU_open Γ e1 e2.
@@ -122,7 +122,7 @@ Proof.
     eapply H; eauto.
 Qed.
 
-(* Lemma 7.3 {lemma-exprel-absorbtive} *)
+(* Lemma 4.3 {lemma-exprel-absorbtive} *)
 Lemma Erel_comp_CIU_implies_Erel : forall {Γ e1 e2 e3},
     Erel_open Γ e1 e2 ->
     CIU_open Γ e2 e3 ->
@@ -141,7 +141,7 @@ Proof.
     + eapply HCIU; eauto.
 Qed.
 
-(* Lemma 7.4 {lemma-ciu-subset-e} *)
+(* Lemma 4.4 {lemma-ciu-subset-e} *)
 Lemma CIU_implies_Erel : forall {Γ e1 e2},
     CIU_open Γ e1 e2 ->
     Erel_open Γ e1 e2.
@@ -150,7 +150,7 @@ Proof.
   eapply Erel_comp_CIU_implies_Erel; eauto.
 Qed.
 
-(* Theorem 7.4 {thm-cu-euqals-e} *)
+(* Theorem 4.5 {thm-cu-euqals-e} *)
 Theorem CIU_iff_Erel : forall {Γ e1 e2},
     CIU_open Γ e1 e2 <->
     Erel_open Γ e1 e2.

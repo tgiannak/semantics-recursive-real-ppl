@@ -24,9 +24,11 @@ Set Bullet Behavior "Strict Subproofs".
 
 Open Scope nat.
 
+(* Lemma 3.1 *)
+
 (* Vrel compatibility *)
 
-(** Lemma 5: variables are value-compatible *)
+(** Sub-lemma: variables are value-compatible *)
 Lemma Vrel_Var_compatible :
   forall Γ x,
     x < Γ ->
@@ -63,7 +65,7 @@ Qed.
 
 Hint Resolve Vrel_Const_compatible.
 
-(** Lemma 6: λ-expressions are value-compatible *)
+(** Sub-lemma: λ-expressions are value-compatible *)
 Lemma Vrel_Fun_compatible :
   forall Γ e1 e2,
     Erel_open (S Γ) e1 e2 ->
@@ -133,7 +135,7 @@ Qed.
 
 Hint Resolve Expr_cons.
 
-(** Lemma 7: e ::= v *)
+(** Sub-lemma: e ::= v *)
 Lemma Erel_Val_compatible_closed :
   forall {n v v'},
     Vrel n v v' ->
@@ -181,7 +183,7 @@ Qed.
 
 Hint Resolve Erel_Var_compatible.
 
-(* Lemma 5: compatible under Fun *)
+(* Sub-lemma: compatible under Fun *)
 Lemma Erel_Fun_compatible :
   forall Γ e e',
     Erel_open (S Γ) e e' ->
@@ -248,7 +250,7 @@ Qed.
 
 Hint Resolve Erel_App_compatible_closed.
 
-(* Lemma 8 *)
+(* Sub-lemma *)
 Lemma Erel_App_compatible : forall Γ v1 v1' v2 v2',
     Vrel_open Γ v1 v2 ->
     Vrel_open Γ v1' v2' ->
@@ -537,9 +539,7 @@ Qed.
 
 Hint Resolve Erel_Cond_compatible.
 
-(* Lemma 9 *)
-
-(* Lemma 9 *)
+(* Sub-lemma *)
 Lemma Krel_Knil_refl : forall n,
     Krel n Knil Knil.
 Proof.
@@ -562,7 +562,7 @@ Proof.
   auto.
 Qed.
   
-(* Lemma 13: compatible under factor *)
+(* Sub-lemma: compatible under factor *)
 Lemma Erel_Factor_compatible_closed : forall n r1 r2,
     Vrel n r1 r2 ->
     Erel n (Factor r1) (Factor r2).
@@ -641,7 +641,7 @@ Qed.
 
 Hint Resolve Erel_Sample_compatible.
 
-(* Fundamental Theorem *)
+(* Theorem 3.2: Fundamental Theorem *)
 
 Theorem Erel_Vrel_Fundamental_helper :
   forall (e : Expr),
