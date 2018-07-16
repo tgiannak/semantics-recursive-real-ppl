@@ -461,7 +461,7 @@ Qed.
 
 Hint Resolve eval_done.
 
-(* Lemma 4.1 part 1 *)
+(* Lemma 2.3 part 1 *)
 Lemma eval_step : forall A n c1 c2,
     step c1 = Some c2 ->
     eval A (S n) c1 = eval A n c2.
@@ -548,7 +548,7 @@ Proof.
       destruct n; cbn; auto.
 Qed.
 
-(* Lemma 4.1 part 2. *)
+(* Lemma 2.3 part 2. *)
 Lemma eval_star_step : forall A c1 c2,
     step c1 = Some c2 ->
     eval_star A c1 = eval_star A c2.
@@ -709,7 +709,7 @@ Proof.
   }
 Qed.
 
-(* Lemma 4.2 part 1 (as stated in paper) *)
+(* Lemma 2.4 part 1 (as stated in paper) *)
 Lemma run_weight_linear_alt : forall n σ e K σK v w',
     run n ⟨ σ | e | K | σK | 1 ⟩ = Some ⟨v@w'⟩ <->
     (forall w, w > 0 -> run n ⟨ σ | e | K | σK | w ⟩ = Some ⟨v@w' * w⟩).
@@ -831,7 +831,7 @@ Proof.
   solve_step e K H.
 Qed.
 
-(* Lemma 4.2 part 2 *)
+(* Lemma 2.4 part 2 *)
 Lemma eval_weight_linear : forall A n c w r,
     eval A n ⟨c|w*r⟩ = w * eval A n ⟨c|r⟩.
 Proof.
@@ -858,7 +858,7 @@ Proof.
         ring.
 Qed.
 
-(* Lemma 4.2 part 2 (as stated in paper) *)
+(* Lemma 2.4 part 2 (as stated in paper) *)
 Lemma eval_weight_linear_alt : forall A n c w,
     eval A n ⟨c|w⟩ = w * eval A n ⟨c|1⟩.
 Proof.
@@ -867,7 +867,7 @@ Proof.
   apply eval_weight_linear.
 Qed.
 
-(* Lemma 4.2 part 2 *)
+(* Lemma 2.4 part 2 *)
 Lemma eval_star_weight_linear : forall A σ e K σK w r,
     eval_star A ⟨σ|e|K|σK|w*r⟩ = Rbar_mult w (eval_star A ⟨σ|e|K|σK|r⟩).
 Proof.
@@ -879,7 +879,7 @@ Proof.
   apply eval_weight_linear.
 Qed.
 
-(* Lemma 4.2 part 2 (as stated in paper) *)
+(* Lemma 2.4 part 2 (as stated in paper) *)
 Lemma eval_star_weight_linear_alt : forall A σ e K σK w,
     eval_star A ⟨σ|e|K|σK|w⟩ = Rbar_mult w (eval_star A ⟨σ|e|K|σK|1⟩).
 Proof.

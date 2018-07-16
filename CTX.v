@@ -575,7 +575,7 @@ Proof.
     eapply H10; eauto.
 Qed.
 
-(* Lemma 8.6 {lemma-beta-value-ciu} *)
+(* Lemma 5.5 {lemma-beta-value-ciu} *)
 Lemma CIU_beta_value : forall {Γ b v},
     EXP S Γ ⊢ b ->
     VAL Γ ⊢ v ->
@@ -612,6 +612,7 @@ Proof.
     auto.
 Qed.
 
+(* Lemma 5.6 *)
 Lemma CTX_closed_under_substitution : forall {Γ e1 e2 v CTX},
     IsCtxRel CTX ->
     VAL Γ ⊢ v ->
@@ -1405,7 +1406,7 @@ Proof.
   exists CTX.
   apply CTX_IsCtxRel.
 Qed.
-    
+
 (*** End Concrete CTX *)
 
 Theorem CIU_IsCtxRel : IsCtxRel CIU_open.

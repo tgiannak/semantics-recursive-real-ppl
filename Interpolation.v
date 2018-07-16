@@ -82,7 +82,7 @@ Definition find_smallest_alt
   let (n,Hn) := H in smallest_alt (find_smallest P_dec n Hn).
 Opaque find_smallest_alt.
 
-(* Definition 4.3 *)
+(* Definition 2.6 *)
 Inductive K_gt : Kont -> Entropy -> Kont -> Entropy -> Prop :=
 | K_nil : forall K σ, K_gt K σ K σ
 | K_cons : forall K1 σ1 K2 σ2 e σ,
@@ -258,7 +258,7 @@ Proof.
   auto.
 Qed.
 
-(* Lemma 4.4 {lemma-continuations-are-continuous} *)
+(* Lemma 2.7 {lemma-continuations-are-continuous} *)
 Lemma continuations_are_continuous : forall i c,
     ConfigClosed c ->
     match c, run i c with
@@ -384,7 +384,7 @@ Proof.
   }
 Qed.
 
-(* Theorem 4.5 {thm-interpolation} *)
+(* Theorem 2.8 {thm-interpolation} *)
 Theorem interpolation : forall σ1 e1 K1 σ1' w1
                                σ3 e3 σ3' w3 n,
     ECLOSED e1 ->
@@ -582,6 +582,7 @@ Proof.
   auto.
 Qed.
 
+(* Theorem 2.9 {thm-genericity} *)
 Theorem genericity : forall n σ σ' e v w' K1 K2 τ1 τ2 w1 w2,
     (w1 <> 0)%R ->
     ECLOSED e ->

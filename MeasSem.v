@@ -21,7 +21,7 @@ Set Bullet Behavior "Strict Subproofs".
 Open Scope R.
 
 (*** From Evaluations to Measures. *)
-(* Definition 5.1 *)
+(* Definition 2.12 *)
 Definition μeval (n : nat) (e : Expr) (K : Kont) (A : Measurable R) : Rbar :=
   integrate (fun σ2 => integrate (fun σ1 => eval A n ⟨ σ1 | e | K | σ2 | 1 ⟩)
                                  μentropy)
@@ -77,7 +77,7 @@ Qed.
 
 Hint Resolve μeval_star_nonnegative.
 
-(* Lemma 5.3 part 3 *)
+(* Lemma 2.14 part 3 *)
 Lemma μeval_index_monotonic : forall (n m : nat) (Hmn: (m <= n)%nat) (e : Expr) (K : Kont) (A : Measurable R),
     Rbar_le (μeval m e K A) (μeval n e K A).
 Proof.
@@ -93,7 +93,7 @@ Qed.
 
 Hint Resolve μeval_index_monotonic.
 
-(* Lemma 5.3 part 3 *)
+(* Lemma 2.14 part 3 *)
 Lemma μeval_star_index_monotonic : forall (n : nat) (e : Expr) (K : Kont) (A : Measurable R),
     Rbar_le (μeval n e K A) (μeval_star e K A).
 Proof.
@@ -109,7 +109,7 @@ Qed.
 
 Hint Resolve μeval_star_index_monotonic.
 
-(* Lemma 5.4 part 4 (but using Lim_seq instead of Sup_seq) *)
+(* Lemma 2.14 part 4 (but using Lim_seq instead of Sup_seq) *)
 Lemma μeval_lim_interchange : forall e K A,
     μeval_star e K A =
     Sup_seq (fun n => μeval n e K A).
@@ -136,7 +136,7 @@ Proof.
 Qed.
 
 
-(*** μeval step lemmas *)
+(*** Lemma 2.15: μeval step lemmas *)
 
 (* Shows that all of the following lemmas apply to μeval_star as well. *)
 
@@ -214,7 +214,7 @@ Proof.
   auto.
 Qed.
 
-(* Lemma 5.5 {lemma-return} *)
+(* Lemma 2.15 subcases *)
 Lemma μeval_step_Return : forall n v e K A,
     VCLOSED v ->
     μeval (S n) v (e-:K) A = μeval n e.[v/] K A.
@@ -227,7 +227,7 @@ Proof.
   trivial.
 Qed.
 
-(* Lemma 5.6 {lemma-return} *)
+(* Lemma 2.15 subcases *)
 Lemma μeval_step_App : forall n b v K A,
     VCLOSED v ->
     μeval (S n) (App (Fun b) v) K A = μeval n b.[v/] K A.
@@ -411,7 +411,7 @@ Proof.
   trivial.
 Qed.
 
-(* Lemma 5.7 *)
+(* Lemma 2.15 (sample) *)
 Lemma μeval_step_Sample : forall n K A,
     μeval (S n) Sample K A =
     integrate (fun σ => μeval n (Const (Entropy_extract σ)) K A) μentropy.
@@ -424,7 +424,7 @@ Proof.
   trivial.
 Qed.
 
-(* Lemma 5.7 *)
+(* Lemma 2.15 (factor) *)
 Lemma μeval_step_Factor : forall n r K A,
     (0 < r)%R ->
     μeval (S n) (Factor (Const r)) K A =
